@@ -1,0 +1,17 @@
+{
+    "extensions": [{
+            "builtin": "False",
+            "default_enabled": "False",
+            "type": "extension",
+            "rocket_mode_compatible": "True",
+            "name": "MyExt",
+            "description": "Extensions for PyRevit",
+            "author": "Daniel Cleary",
+            "author_profile": "https://github.com/DclearEE",
+            "url": "https://www.linkedin.com/in/dclearee/",
+            "website": "https://github.com/DclearEE",
+            "image": "",
+            "dependencies": []
+        }
+    ]
+}
