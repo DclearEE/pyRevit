@@ -13,10 +13,11 @@ from Autodesk.Revit.UI.Selection import ISelectionFilter
 import rpw
 import wpf
 from System import Windows
-from pyrevit import revit
+from itertools import imap
+
+from pyrevit import revit, UI, DB
 from pyrevit import forms
 from pyrevit.forms import WPFWindow
-from pyrevit import UI
 from pyrevit import script
 xamlfile = script.get_bundle_file('ui.xaml')
 
@@ -30,28 +31,61 @@ __author__ = "Daniel Cleary"
 
 logger = script.get_logger()
 
+
+
 class MyWindow(Windows.Window):
 
     def __init__(self):
         wpf.LoadComponent(self, xamlfile)
 
     def SelectPanel_Click(self, sender, args):
-        
+
+        def tolist(obj1):
+            if hasattr(obj1,"__iter__"): return obj1
+            else: return [obj1]
+
+        selection = revit.get_selection()
+        self.Close()
+        class MassSelectionFilter(UI.Selection.ISelectionFilter):
+            # standard API override function
+
+            def AllowElement(self, element):
+                if not element.ViewSpecific:
+                    return True
+                else:
+                    return False
+
+            # standard API override function
+            def AllowReference(self, refer, point):
+                return False
+
+
         try:
-            selection = revit.get_selection()
-            msfilter = CustomSelectionFilter("Electrical Equipment")
+            msfilter = MassSelectionFilter()
             selection_list = revit.pick_rectangle(pick_filter=msfilter)
-            filtered_list = []
-            for element in selection_list:
-                filtered_list.append(element.Id)
+            for el in selection_list:
+                filtered_list.append(el.Id)
             selection.set_to(filtered_list)
-            print(msfilter)
-        except Exception as err:
-            logger.debug(err)
-
-        UI.TaskDialog.Show("Hello World", "Hello{}")
-
-
+            revit.uidoc.RefreshActiveView()
+        except Exception:
+            pass
+        
+        in1 = []
+        out1 = []
+        filter = map(str.lower, imap(str, tolist("Electrical Equipment") ) ) 
+        for e in selection_list:
+            c1 = e.Category
+            if c1 is None:
+                nulls.append(e)
+            else:
+                n1 = c1.Name.lower()
+                if any(f in n1 for f in filter):
+                    in1.append(e)
+                else:
+                    out1.append(e)
+        for x in in1:
+            print(x.Name)
+        MyWindow().ShowDialog()
 
     def RUN_Click(self, sender, args):
         findPanel = self.PanelFind.Text
@@ -59,70 +93,62 @@ class MyWindow(Windows.Window):
         findCircuit = self.CircuitFind.Text
         replaceCircuit = self.CircuitReplace.Text
         self.Close()
+
         
 MyWindow().ShowDialog()
 
-class CustomSelectionFilter(ISelectionFilter):
-    def __init__(self):
-        self.category = catname
+""" CategoryOption = namedtuple('CategoryOption', ['name', 'revit_cat'])
+
+category_opt = DB.BuiltInCategory.OST_Grids """
+
+""" class PickByCategorySelectionFilter(UI.Selection.ISelectionFilter):
+    def __init__(self, category_opt):
+        self.category_opt = category_opt
 
     # standard API override function
     def AllowElement(self, element):
-        if self.category in element.Category.Name:
+        if element.Category \
+                and self.category_opt.revit_cat.Id == element.Category.Id:
             return True
         else:
             return False
 
     # standard API override function
-    def AllowReference(self, refer, point): #pylint: disable=W0613
+    def AllowReference(self, refer, point):  # pylint: disable=W0613
         return False
 
-    
 
-def pickbycategory(catname):
+def pick_by_category(category_opt):
     try:
         selection = revit.get_selection()
-        msfilter = CustomSelectionFilter(catname)
+        msfilter = PickByCategorySelectionFilter(category_opt)
         selection_list = revit.pick_rectangle(pick_filter=msfilter)
-
         filtered_list = []
         for element in selection_list:
             filtered_list.append(element.Id)
-            
         selection.set_to(filtered_list)
-        print(msfilter)
     except Exception as err:
         logger.debug(err)
 
 
 
-if __shiftclick__:  #pylint: disable=E0602
-    options = sorted([x.Name for x in revit.doc.Settings.Categories])
-else:
-    options = sorted(['Area',
-                      'Area Boundary',
-                      'Column',
-                      'Dimension',
-                      'Door',
-                      'Floor',
-                      'Framing',
-                      'Furniture',
-                      'Grid',
-                      'Rooms',
-                      'Room Tag',
-                      'Truss',
-                      'Wall',
-                      'Window',
-                      'Ceiling',
-                      'Section Box',
-                      'Elevation Mark',
-                      'Parking'])
+source_categories = \
+    [revit.query.get_category(x) for x in FREQUENTLY_SELECTED_CATEGORIES]
+if __shiftclick__:  # pylint: disable=E0602
+    source_categories = revit.doc.Settings.Categories
 
-selected_switch = \
-    forms.CommandSwitchWindow.show(options,
-                                   message='Pick only elements of type:')
+# cleanup source categories
+source_categories = filter(None, source_categories)
+category_opts = \
+    [CategoryOption(name=x.Name, revit_cat=x) for x in source_categories]
+selected_category = \
+    forms.CommandSwitchWindow.show(
+        sorted([x.name for x in category_opts]),
+        message='Pick only elements of type:'
+    )
 
-if selected_switch:
-    pickbycategory(selected_switch)
-
-    
+if selected_category:
+    selected_category_opt = \
+        next(x for x in category_opts if x.name == selected_category)
+    logger.debug(selected_category_opt) 
+    pick_by_category(selected_category_opt) """
