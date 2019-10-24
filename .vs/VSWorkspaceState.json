@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MyPyExt.extension",
+    "\\MyPyExt.extension\\MyTab.tab",
+    "\\MyPyExt.extension\\MyTab.tab\\MyPanel.panel",
+    "\\MyPyExt.extension\\MyTab.tab\\MyPanel.panel\\Select_Panel.pushbutton"
+  ],
+  "SelectedNode": "\\MyPyExt.extension\\MyTab.tab\\MyPanel.panel\\Select_Panel.pushbutton\\ui.xaml",
+  "PreviewInSolutionExplorer": false
+}

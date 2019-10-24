@@ -1,0 +1,23 @@
+<Window      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CopyWindow.Forms"
+             mc:Ignorable="d"
+             Background="White" WindowStyle="ToolWindow" Title="Copy Multiple Panels with Circuits" MinWidth="400" MinHeight="305" Width="351.677" Height="344.555" WindowStartupLocation="CenterOwner">
+    <Grid Margin="5,5,2,10">
+        <Button x:Name="SelectPanel" Content="Select Panel(s)" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="93" Click="SelectPanel_Click"/>
+        <Label Content="Selected Panel(s):" HorizontalAlignment="Left" Margin="115,2,0,0" VerticalAlignment="Top" Width="102" />
+        <Button x:Name="Origin" Content="Origin Location" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Element Name:" HorizontalAlignment="Left" Margin="115,64,0,0" VerticalAlignment="Top" Width="102"/>
+        <Button x:Name="End" Content="End Location" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="93"/>
+        <Label x:Name="EndElement" Content="Element Name:" HorizontalAlignment="Left" Margin="115,95,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="PanelFind" HorizontalAlignment="Left" Height="23" Margin="10,164,0,0" TextWrapping="Wrap" Text="Find" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="PanelReplace" HorizontalAlignment="Left" Height="23" Margin="218,164,0,0" TextWrapping="Wrap" Text="Replace" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,148,0,0" TextWrapping="Wrap" Text="Panel Name: Find and Replace" VerticalAlignment="Top" Width="244"/>
+        <TextBox x:Name="CircuitFind" HorizontalAlignment="Left" Height="23" Margin="10,223,0,0" TextWrapping="Wrap" Text="Find" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="CircuitReplace" HorizontalAlignment="Left" Height="23" Margin="218,223,0,0" TextWrapping="Wrap" Text="Replace" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,207,0,0" TextWrapping="Wrap" Text="Circuit Name: Find and Replace" VerticalAlignment="Top" Width="244"/>
+        <Button x:Name="RUN" Content="RUN" HorizontalAlignment="Left" Margin="130,260,0,0" VerticalAlignment="Top" Width="87" Click="RUN_Click" Height="30"/>
+    </Grid>
+</Window>
