@@ -49,14 +49,17 @@ class MyWindow(Windows.Window):
         except Exception as err:
             logger.debug(err)
 
-        #UI.TaskDialog.Show("Hello World", "Hello{}")
+        UI.TaskDialog.Show("Hello World", "Hello{}")
+
+
 
     def RUN_Click(self, sender, args):
         findPanel = self.PanelFind.Text
         replacePanel = self.PanelReplace.Text
         findCircuit = self.CircuitFind.Text
         replaceCircuit = self.CircuitReplace.Text
-
+        self.Close()
+        
 MyWindow().ShowDialog()
 
 class CustomSelectionFilter(ISelectionFilter):
@@ -93,7 +96,7 @@ def pickbycategory(catname):
 
 
 
-""" if __shiftclick__:  #pylint: disable=E0602
+if __shiftclick__:  #pylint: disable=E0602
     options = sorted([x.Name for x in revit.doc.Settings.Categories])
 else:
     options = sorted(['Area',
@@ -121,5 +124,5 @@ selected_switch = \
 
 if selected_switch:
     pickbycategory(selected_switch)
- """
+
     
