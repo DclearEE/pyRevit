@@ -1,0 +1,4 @@
+D:\------Projects-------\Visual Studio\Projects - NBK\NBK.Spool\NBK.Spool\obj\R2016\NBK.Spool.csprojAssemblyReference.cache
+D:\------Projects-------\Visual Studio\Projects - NBK\NBK.Spool\NBK.Spool\obj\R2016\NBK.Spool.Forms.SpoolForm.resources
+D:\------Projects-------\Visual Studio\Projects - NBK\NBK.Spool\NBK.Spool\obj\R2016\NBK.Spool.csproj.GenerateResource.cache
+D:\------Projects-------\Visual Studio\Projects - NBK\NBK.Spool\NBK.Spool\obj\R2016\NBK.Spool.csproj.CoreCompileInputs.cache

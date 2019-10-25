@@ -8,9 +8,9 @@
     <Grid Margin="5,5,2,10">
         <Button x:Name="SelectPanel" Content="Select Panel(s)" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="93" Click="SelectPanel_Click"/>
         <Label Content="Selected Panel(s):" HorizontalAlignment="Left" Margin="115,2,0,0" VerticalAlignment="Top" Width="102" />
-        <Button x:Name="Origin" Content="Origin Location" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="Origin" Content="Origin Location" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Width="93" Click="Origin_Click"/>
         <Label Content="Element Name:" HorizontalAlignment="Left" Margin="115,64,0,0" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="End" Content="End Location" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="End" Content="End Location" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="93" Click="End_Click"/>
         <Label x:Name="EndElement" Content="Element Name:" HorizontalAlignment="Left" Margin="115,95,0,0" VerticalAlignment="Top" Width="102"/>
         <TextBox x:Name="PanelFind" HorizontalAlignment="Left" Height="23" Margin="10,164,0,0" TextWrapping="Wrap" Text="Find" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="PanelReplace" HorizontalAlignment="Left" Height="23" Margin="218,164,0,0" TextWrapping="Wrap" Text="Replace" VerticalAlignment="Top" Width="120"/>
